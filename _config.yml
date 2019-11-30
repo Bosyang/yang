@@ -94,4 +94,5 @@ theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-
+deploy:
+  type: ''
