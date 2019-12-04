@@ -29,3 +29,30 @@ comst promise = new Promise(function(resolve,reject) {
 })
 ```
 
+* Promise 构造函数接收一个函数作为参数，该函数的两个参数分别为 `resolve` 和 `reject` ，它们是两个函数，有JavaScript 引擎提供，不用自己部署。
+* `resolve` 函数的作用是，将`Promise`对象的状态从"未完成"变为"成功"(即从pending变为resolved)，在异步操作成功时调用，并将异步操作的结果，作为参数传递出啊去；`reject`函数的作用是，将`Promise`对象的状态从"未完成"变为"失败"(即从peding变为rejected)，在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+* `Promise`实例生成后，可以用`then`方法分别指定`resolved`状态和`rejected`状态的回掉函数。
+
+```js
+promise.then(function(value) {
+    // success
+}, function(error) {
+    // failure
+});
+```
+
+* `then`方法可以接受两个回调函数作为参数，第一个回调函数是`Promise`对象的状态变为`resolved`时调用，第二个回调函数是`Promise`对象的状态变为`rejected`时调用，其中，第二个参数是可选的，不一定要提供。这两个函数都接收Promise对象传出的值作为参数。
+
+Promise封装一个定时器
+
+```JS
+function sleep (time){
+    return new Promise((resolve,reject)=>{
+        setTimeout(resolve,time,'done')  //定时器第一个参数为回调函数，参数2:定时器时间，参数3 .....：回调函数的参数
+    })
+}
+sleep(3000).then((value)=>{
+    console.log(value);
+})
+```
+
