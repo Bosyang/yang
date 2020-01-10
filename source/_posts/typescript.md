@@ -150,7 +150,7 @@ console.log( num )  // true
 
 ### void类型
 
-1. 
+1. es5定义方法
 
 ```js
 // es5 定义方法
@@ -160,7 +160,7 @@ function run ( ){
 run()
 ```
 
-2. 
+2. 表示没有返回值
 
 ```js
 //表示方法没有返回 任何类型
@@ -170,7 +170,7 @@ function run ( ) : void {
 run()
 ```
 
-3. 
+3. 没有返回值 需要 void
 
 ``` js
 function run ( ) : number {    //错误写法   
@@ -179,7 +179,7 @@ function run ( ) : number {    //错误写法
 run()
 ```
 
-4. 
+4. 如有返回值 需要写返回值类型
 
 ```js
 function run ( ) : number {    // 如果有返回值 要写返回值类型   正确写法
@@ -190,14 +190,14 @@ run()
 
 ### null 和 undefined
 
-1. 
+1. 定义 后 需要赋值
 
 ```js
 var num : number    // 定义没有赋值 会报错
 console.log( num )  
 ```
 
-2. 
+2. 传入数字 或 不传
 
 ```js
 var num : number | undefined
@@ -205,7 +205,7 @@ num = 123
 console.log( num ) //输出123
 ```
 
-3. 
+3. 不传时  也不会报错
 
 ```js
 var num : number | undefined   // 定义没有赋值 不会报错
@@ -226,7 +226,7 @@ console.log( num )   // 输出1234
 
 1. 代表从不会出现的值 
 
-2. 
+2. 定义什么类型  就要传什么类型
 
 ```js
 var a : undefined;
@@ -235,14 +235,14 @@ var b : null
 b = null //正确写法
 ```
 
-3. 
+3. 定义never 后 传其他会报错
 
 ```js
 var a : never
 a = 123   //报错
 ```
 
-4. 
+4. never
 
 ```js
 var a : never
@@ -388,7 +388,7 @@ alert( getInfo ( 'zhangsan' ))    //  zhangsan --- 30
 
 4. 剩余参数
 
-* 
+* 普通方式
 
 ```js
 function sum ( a : number , b : number , c : number , d : number ) : number {
