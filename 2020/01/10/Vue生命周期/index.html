@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vue生命周期 | Yangblog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="生命周期所有的生命周期钩子自动绑定 this 上下文到实例中，因此你可以访问数据，对属性和方法进行运算。这意味着你不能使用箭头函数来定义一个生命周期方法 (例如 created: () &#x3D;&gt; this.fetchTodos())。这是因为箭头函数绑定了父上下文，因此 this 与你期待的 Vue 实例不同，this.fetchTodos 的行为未定义。 生命周期图示下图展示了实例的生命周期。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue生命周期">
+<meta property="og:url" content="http://yoursite.com/2020/01/10/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/index.html">
+<meta property="og:site_name" content="Yangblog">
+<meta property="og:description" content="生命周期所有的生命周期钩子自动绑定 this 上下文到实例中，因此你可以访问数据，对属性和方法进行运算。这意味着你不能使用箭头函数来定义一个生命周期方法 (例如 created: () &#x3D;&gt; this.fetchTodos())。这是因为箭头函数绑定了父上下文，因此 this 与你期待的 Vue 实例不同，this.fetchTodos 的行为未定义。 生命周期图示下图展示了实例的生命周期。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cn.vuejs.org/images/lifecycle.png">
+<meta property="og:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2964079374,2541441406&fm=173&app=25&f=JPEG?w=553&h=604&s=8271C730118FE14F44C540DA000080B2">
+<meta property="og:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1426589767,3856573575&fm=173&app=25&f=JPG?w=522&h=312&s=C0411F74119ACDC80074F4CE030010B1">
+<meta property="og:image" content="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=286215131,3982839788&fm=173&app=25&f=JPG?w=607&h=157&s=37FEEF36CF624D205C65BCFB03008035">
+<meta property="og:image" content="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4249347146,621964453&fm=173&app=25&f=JPEG?w=640&h=586&s=C2718F70818FD14D1E54A8D20000C0B2">
+<meta property="og:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1858455738,4278016&fm=173&app=25&f=JPG?w=639&h=244&s=8AF1CF148BC04C411A7590D00300D0B1">
+<meta property="og:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3986693091,3912795656&fm=173&app=25&f=JPG?w=232&h=84&s=3AAA70239F204C0116DDA5DE000080B2">
+<meta property="og:image" content="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4099699163,4260093637&fm=173&app=25&f=JPG?w=453&h=99&s=C8718F50C5366C225CF8D943030050B1">
+<meta property="og:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=745930405,12349775&fm=173&app=25&f=JPG?w=401&h=106&s=C0718F70C7347C234CF85953030070B1">
+<meta property="og:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4136287011,766109910&fm=173&app=25&f=JPG?w=573&h=434&s=C0718F70111ED5CE4E719CDA0300C0B1">
+<meta property="og:image" content="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=986075873,4272956589&fm=173&app=25&f=JPG?w=367&h=124&s=C0710F7087705C211C6494DA0300C0B1">
+<meta property="og:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3165699403,4051965807&fm=173&app=25&f=JPEG?w=640&h=558&s=8271C730910FC14D4E558CDA0000C0B2">
+<meta property="og:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2169262960,1491226231&fm=173&app=25&f=JPEG?w=639&h=378&s=8871CF10155AE5CC547108DA000090B2">
+<meta property="og:image" content="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1971826948,3543434272&fm=173&app=25&f=JPEG?w=639&h=330&s=B284B54C1AEC816C0EF9E50F0000E0C3">
+<meta property="og:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=923951616,4153617320&fm=173&app=25&f=JPG?w=189&h=130&s=3EAA74230D5E40CA44F564DE0000C0B0">
+<meta property="article:published_time" content="2020-01-10T09:11:30.138Z">
+<meta property="article:modified_time" content="2020-01-10T09:11:30.138Z">
+<meta property="article:author" content="徐文洋">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cn.vuejs.org/images/lifecycle.png">
+  
+    <link rel="alternate" href="/yang/atom.xml" title="Yangblog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/yang/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/yang/" id="logo">Yangblog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/yang/">Home</a>
+        
+          <a class="main-nav-link" href="/yang/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/yang/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vue生命周期" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/yang/2020/01/10/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="article-date">
+  <time datetime="2020-01-10T09:11:30.138Z" itemprop="datePublished">2020-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue生命周期
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>所有的生命周期钩子自动绑定 <code>this</code> 上下文到实例中，因此你可以访问数据，对属性和方法进行运算。这意味着<strong>你不能使用箭头函数来定义一个生命周期方法</strong> (例如 <code>created: () =&gt; this.fetchTodos()</code>)。这是因为箭头函数绑定了父上下文，因此 <code>this</code> 与你期待的 Vue 实例不同，<code>this.fetchTodos</code> 的行为未定义。</p>
+<h2 id="生命周期图示"><a href="#生命周期图示" class="headerlink" title="生命周期图示"></a>生命周期图示</h2><p>下图展示了实例的生命周期。你不需要立马弄明白所有的东西，不过随着你的不断学习和使用，它的参考价值会越来越高。</p>
+<img src="https://cn.vuejs.org/images/lifecycle.png">
+
+<h2 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a><a href="https://cn.vuejs.org/v2/api/#beforeCreate" target="_blank" rel="noopener">beforeCreate</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。</p>
+</li>
+</ul>
+<p><img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2964079374,2541441406&fm=173&app=25&f=JPEG?w=553&h=604&s=8271C730118FE14F44C540DA000080B2" alt="img"></p>
+<p><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1426589767,3856573575&fm=173&app=25&f=JPG?w=522&h=312&s=C0411F74119ACDC80074F4CE030010B1" alt="img"></p>
+<p>我们在上面的例子中在的<code>beforeCreate</code>钩子中调用<code>Vue</code>的<code>data</code>和<code>method</code>，来看一下结果：</p>
+<p><img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=286215131,3982839788&fm=173&app=25&f=JPG?w=607&h=157&s=37FEEF36CF624D205C65BCFB03008035" alt="img"></p>
+<p>可以看到<code>Vue</code>中的<code>data</code>和方法都是去不到的，并且是在<code>wath</code>之前执行</p>
+<h2 id="created"><a href="#created" class="headerlink" title="created"></a><a href="https://cn.vuejs.org/v2/api/#created" target="_blank" rel="noopener">created</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，<code>$el</code> 属性目前不可见。</p>
+</li>
+</ul>
+<ul>
+<li><strong>主要应用：</strong>调用数据，调用方法，调用异步函数</li>
+</ul>
+<p><img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4249347146,621964453&fm=173&app=25&f=JPEG?w=640&h=586&s=C2718F70818FD14D1E54A8D20000C0B2" alt="img"></p>
+<p><img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1858455738,4278016&fm=173&app=25&f=JPG?w=639&h=244&s=8AF1CF148BC04C411A7590D00300D0B1" alt="img"></p>
+<p>结果：</p>
+<p><img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3986693091,3912795656&fm=173&app=25&f=JPG?w=232&h=84&s=3AAA70239F204C0116DDA5DE000080B2" alt="img"></p>
+<p>可以看到：created钩子可以获取<code>Vue</code>的data，调用<code>Vue</code>方法，获取原本<code>HTML</code>上的直接加载出来的<code>DOM</code>，但是无法获取到通过挂载模板生成的<code>DOM</code>（例如：<code>v-for</code>循环遍历<code>Vue.list</code>生成<code>li</code>）</p>
+<h2 id="beforeMount"><a href="#beforeMount" class="headerlink" title="beforeMount"></a><a href="https://cn.vuejs.org/v2/api/#beforeMount" target="_blank" rel="noopener">beforeMount</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>在挂载开始之前被调用：相关的 <code>render</code> 函数首次被调用。例如通过<code>v-for</code>生成的<code>html</code>还没有被挂载到页面上 （接 2<code>created</code>的代码）<strong>该钩子在服务器端渲染期间不被调用。</strong></p>
+</li>
+</ul>
+<p>结果 beforeMount: 1</p>
+<h2 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a><a href="https://cn.vuejs.org/v2/api/#mounted" target="_blank" rel="noopener">mounted</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p><code>el</code> 被新创建的 <code>vm.$el</code> 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 <code>mounted</code> 被调用时 <code>vm.$el</code> 也在文档内。</p>
+<p>注意 <code>mounted</code> <strong>不会</strong>承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 <a href="https://cn.vuejs.org/v2/api/#vm-nextTick" target="_blank" rel="noopener">vm.$nextTick</a> 替换掉 <code>mounted</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mounted: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Code that will run only after the</span></span><br><span class="line">    <span class="comment">// entire view has been rendered</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>该钩子在服务器端渲染期间不被调用。</strong></p>
+</li>
+</ul>
+<p>（接 2<code>created</code>的代码）</p>
+<p>结果 mounted: 3 可以看到到这里为止，挂载到实例上了，我们可以获取到<code>li</code>的个数了</p>
+<h2 id="beforeUpdate"><a href="#beforeUpdate" class="headerlink" title="beforeUpdate"></a><a href="https://cn.vuejs.org/v2/api/#beforeUpdate" target="_blank" rel="noopener">beforeUpdate</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。</p>
+<p><strong>该钩子在服务器端渲染期间不被调用，因为只有初次渲染会在服务端进行。</strong></p>
+</li>
+</ul>
+<p>数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。 当我们更改<code>Vue</code>的任何数据，都会触发该函数</p>
+<p><img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4099699163,4260093637&fm=173&app=25&f=JPG?w=453&h=99&s=C8718F50C5366C225CF8D943030050B1" alt="img"></p>
+<h2 id="updated"><a href="#updated" class="headerlink" title="updated"></a><a href="https://cn.vuejs.org/v2/api/#updated" target="_blank" rel="noopener">updated</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。</p>
+<p>当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用<a href="https://cn.vuejs.org/v2/api/#computed" target="_blank" rel="noopener">计算属性</a>或 <a href="https://cn.vuejs.org/v2/api/#watch" target="_blank" rel="noopener">watcher</a> 取而代之。</p>
+<p>注意 <code>updated</code> <strong>不会</strong>承诺所有的子组件也都一起被重绘。如果你希望等到整个视图都重绘完毕，可以用 <a href="https://cn.vuejs.org/v2/api/#vm-nextTick" target="_blank" rel="noopener">vm.$nextTick</a> 替换掉 <code>updated</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">updated: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Code that will run only after the</span></span><br><span class="line">    <span class="comment">// entire view has been re-rendered</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>该钩子在服务器端渲染期间不被调用。</strong></p>
+</li>
+</ul>
+<p>数据更新就会触发（<code>vue</code>所有的数据只有有更新就会触发）,如果想数据一遍就做统一的处理，可以用这个，如果想对不同数据的更新做不同的处理可以用<code>nextTick</code>，或者是watch进行监听</p>
+<p><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=745930405,12349775&fm=173&app=25&f=JPG?w=401&h=106&s=C0718F70C7347C234CF85953030070B1" alt="img"></p>
+<h2 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a><a href="https://cn.vuejs.org/v2/api/#beforeDestroy" target="_blank" rel="noopener">beforeDestroy</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>实例销毁之前调用。在这一步，实例仍然完全可用。</p>
+<p><strong>该钩子在服务器端渲染期间不被调用。</strong></p>
+</li>
+</ul>
+<h2 id="destroyed"><a href="#destroyed" class="headerlink" title="destroyed"></a><a href="https://cn.vuejs.org/v2/api/#destroyed" target="_blank" rel="noopener">destroyed</a></h2><ul>
+<li><p><strong>类型</strong>：<code>Function</code></p>
+</li>
+<li><p><strong>详细</strong>：</p>
+<p>Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</p>
+<p><strong>该钩子在服务器端渲染期间不被调用。</strong></p>
+</li>
+</ul>
+<p><img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4136287011,766109910&fm=173&app=25&f=JPG?w=573&h=434&s=C0718F70111ED5CE4E719CDA0300C0B1" alt="img"></p>
+<p>结果：</p>
+<p>可以看打到销毁<code>Vue</code>实例时会调用这两个函数</p>
+<p>补充<code>$mount</code></p>
+<p>当你<code>vue</code>没有挂在el时，我们可以用<code>$mount</code></p>
+<p><img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=986075873,4272956589&fm=173&app=25&f=JPG?w=367&h=124&s=C0710F7087705C211C6494DA0300C0B1" alt="img"></p>
+<p>三.钩子的一些实战用法</p>
+<p>1.异步函数</p>
+<p>这里我们用定时器来做异步函数</p>
+<p><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3165699403,4051965807&fm=173&app=25&f=JPEG?w=640&h=558&s=8271C730910FC14D4E558CDA0000C0B2" alt="img"></p>
+<p>结果为：create: aaaaaaaa mounted: 3 created异步函数： 3 updated: 4 解释：可以看到因为是在created的钩子中加入异步函数，所以函数的执行顺序为： ceated钩子,mounted钩子,异步函数,updated钩子(根据事件队列原理,只有在updated后，li才是真的DOM渲染为4个，所以异步函数中获取的li的个数时是没有变化的li的个数)。 因为mounted获取到的是我们在Vue的data中设置初始值渲染的DOM，而我们是在异步函数中变化的list数据，所以mounted获取的li的个数为3。 update函数是只要数据vue绑定的数据变化就会触发，所以最后执行，为4</p>
+<p>这是不是意味着可以直接在update函数中操作呢，其实不是，因为update函数是针对vue的所有数据的变化，而我们也有可能会有其他数据的变化。</p>
+<p>例如下面的例子：</p>
+<p><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2169262960,1491226231&fm=173&app=25&f=JPEG?w=639&h=378&s=8871CF10155AE5CC547108DA000090B2" alt="img"></p>
+<p>结果为：</p>
+<p>2.Vue.nextTick对异步函数的结果进行操作</p>
+<p>我们想要改变数据时,各自触发各自的方法</p>
+<p><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1971826948,3543434272&fm=173&app=25&f=JPEG?w=639&h=330&s=B284B54C1AEC816C0EF9E50F0000E0C3" alt="img"></p>
+<p>结果：</p>
+<p><img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=923951616,4153617320&fm=173&app=25&f=JPG?w=189&h=130&s=3EAA74230D5E40CA44F564DE0000C0B0" alt="img"></p>
+<p>我们可以看到通过$nextTick我们可以对异步函数的结果进行各自的操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/10/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" data-id="ck57xz4wd000aabp51o1s1l50" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/yang/2020/01/10/typescript/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          typescript
+        
+      </div>
+    </a>
+  
+  
+    <a href="/yang/2019/01/13/git%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/yang/2020/01/10/typescript/">typescript</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2020/01/10/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Vue生命周期</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2019/01/13/git%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">Git命令</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2018/12/28/%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E4%BE%A6%E5%90%AC%E5%99%A8/">computed 和 watch</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2018/12/15/Vuex/">Vuex</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 徐文洋<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/yang/" class="mobile-nav-link">Home</a>
+  
+    <a href="/yang/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/yang/fancybox/jquery.fancybox.css">
+
+  
+<script src="/yang/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/yang/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

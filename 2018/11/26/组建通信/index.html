@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>组建通信 | Yangblog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vue 组件通信组件都是 私有作用域  如果想访问 需要 设置组件之间的通信 props down (父传子)1、在父组件中给组件传递数据 1&lt;foo :name&#x3D;&quot;message&quot;&gt;&lt;&#x2F;foo&gt; 12345data () &amp;#123;  return &amp;#123;	  message: hello  &amp;#125;&amp;#125;  2、在子组件中声明 props 接收 1&amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组建通信">
+<meta property="og:url" content="http://yoursite.com/2018/11/26/%E7%BB%84%E5%BB%BA%E9%80%9A%E4%BF%A1/index.html">
+<meta property="og:site_name" content="Yangblog">
+<meta property="og:description" content="Vue 组件通信组件都是 私有作用域  如果想访问 需要 设置组件之间的通信 props down (父传子)1、在父组件中给组件传递数据 1&lt;foo :name&#x3D;&quot;message&quot;&gt;&lt;&#x2F;foo&gt; 12345data () &amp;#123;  return &amp;#123;	  message: hello  &amp;#125;&amp;#125;  2、在子组件中声明 props 接收 1&amp;l">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-26T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-10T09:11:30.138Z">
+<meta property="article:author" content="徐文洋">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/yang/atom.xml" title="Yangblog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/yang/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/yang/" id="logo">Yangblog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/yang/">Home</a>
+        
+          <a class="main-nav-link" href="/yang/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/yang/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-组建通信" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/yang/2018/11/26/%E7%BB%84%E5%BB%BA%E9%80%9A%E4%BF%A1/" class="article-date">
+  <time datetime="2018-11-26T00:00:00.000Z" itemprop="datePublished">2018-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      组建通信
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Vue-组件通信"><a href="#Vue-组件通信" class="headerlink" title="Vue 组件通信"></a>Vue 组件通信</h1><p>组件都是 私有作用域 </p>
+<p>如果想访问 需要 设置组件之间的通信</p>
+<h2 id="props-down-父传子"><a href="#props-down-父传子" class="headerlink" title="props down (父传子)"></a>props down (父传子)</h2><p>1、在父组件中给组件传递数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">foo</span> <span class="attr">:name</span>=<span class="string">"message"</span>&gt;</span><span class="tag">&lt;/<span class="name">foo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">	  message: hello</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、在子组件中声明 props 接收</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props:[<span class="string">'name'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>3、单项数据流</p>
+<ul>
+<li>props 中的数据 只受 父组件影响，反之不会</li>
+<li>props 中的 数据 只拿来用 不能给改</li>
+</ul>
+<h2 id="event-up-监听子组件事件"><a href="#event-up-监听子组件事件" class="headerlink" title="event up (监听子组件事件)"></a>event up (监听子组件事件)</h2><p>发通知给父组件，让父组件自己修改自己</p>
+<ul>
+<li>给父组件发送一个自定义通知事件</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123;name&#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"onChange"</span>&gt;</span></span><br><span class="line">    修改父组件 </span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props:[<span class="string">'name'</span>],</span><br><span class="line">methods:&#123;</span><br><span class="line">  onChange()&#123;</span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">'change'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后监听自定义事件 并绑定一个处理函数</li>
+<li>v-on 监听</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">foo</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">:name</span>=<span class="string">"message"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">v-on</span> <span class="attr">:</span> <span class="attr">change</span> = <span class="string">"fatherChange"</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">foo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">	  message: hello</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">	fatherChange () &#123;</span><br><span class="line">	<span class="keyword">this</span>.message = world</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>子组件 可以向 父组件传递参数</li>
+</ul>
+<p>​        在  this.$emit(‘change’,参数)</p>
+<h2 id="示例-封装一个计数器"><a href="#示例-封装一个计数器" class="headerlink" title="示例 封装一个计数器"></a>示例 封装一个计数器</h2><ul>
+<li>父组件</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button-number</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:</span> <span class="attr">value</span> = <span class="string">"num"</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">input</span> = <span class="string">"num = $event"</span>   </span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button-number</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button-number</span> <span class="attr">v-model</span> = <span class="string">"num"</span>&gt;</span><span class="tag">&lt;/<span class="name">button-number</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>子组件</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">click</span> = <span class="string">"changeIt(-1)"</span></span></span><br><span class="line"><span class="tag">&gt;</span> - <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span> = <span class="string">"text"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">:</span> <span class="attr">value</span> = <span class="string">"value"</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">input</span> = <span class="string">"onInput"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> </span></span><br><span class="line"><span class="tag">   @<span class="attr">click</span> = <span class="string">"changeIt(1)"</span></span></span><br><span class="line"><span class="tag">&gt;</span> + <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">props: [<span class="string">'value'</span>]</span><br><span class="line">methods () &#123;</span><br><span class="line">  changeIt (num) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">'input'</span>,<span class="keyword">this</span>.value+num)</span><br><span class="line">  &#125;,</span><br><span class="line">  onInput(e)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">'input'</span>,<span class="built_in">Number</span>.parseInt(e.target.value))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/26/%E7%BB%84%E5%BB%BA%E9%80%9A%E4%BF%A1/" data-id="ck57xz4vz0007abp5dd5qdja5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/yang/2018/11/26/Promise/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Promise 异步编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/yang/2018/11/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">正则表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/yang/2020/01/10/typescript/">typescript</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2020/01/10/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Vue生命周期</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2019/01/13/git%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">Git命令</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2018/12/28/%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E4%BE%A6%E5%90%AC%E5%99%A8/">computed 和 watch</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2018/12/15/Vuex/">Vuex</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 徐文洋<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/yang/" class="mobile-nav-link">Home</a>
+  
+    <a href="/yang/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/yang/fancybox/jquery.fancybox.css">
+
+  
+<script src="/yang/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/yang/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

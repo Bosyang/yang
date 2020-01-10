@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>浏览器兼容问题 | Yangblog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="不同浏览器的标签默认外补丁margin和内补丁padding不同发生概率：100% 解决方案：使用CSS通配符*，设置内外补丁为0 1&amp;#123; margin: 0; padding: 0;&amp;#125;  块属性标签float之后，又有横向的margin值，在IE6中显示会比设置的大（IE6双边距bug）发生概率：90%  解决方案：在float标签样式控制中加入display:inline;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器兼容问题">
+<meta property="og:url" content="http://yoursite.com/2018/09/18/%E5%B8%B8%E8%A7%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Yangblog">
+<meta property="og:description" content="不同浏览器的标签默认外补丁margin和内补丁padding不同发生概率：100% 解决方案：使用CSS通配符*，设置内外补丁为0 1&amp;#123; margin: 0; padding: 0;&amp;#125;  块属性标签float之后，又有横向的margin值，在IE6中显示会比设置的大（IE6双边距bug）发生概率：90%  解决方案：在float标签样式控制中加入display:inline;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-09-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-10T09:11:30.138Z">
+<meta property="article:author" content="徐文洋">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/yang/atom.xml" title="Yangblog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/yang/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/yang/" id="logo">Yangblog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/yang/">Home</a>
+        
+          <a class="main-nav-link" href="/yang/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/yang/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-常见浏览器兼容问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/yang/2018/09/18/%E5%B8%B8%E8%A7%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2018-09-18T00:00:00.000Z" itemprop="datePublished">2018-09-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浏览器兼容问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="不同浏览器的标签默认外补丁margin和内补丁padding不同"><a href="#不同浏览器的标签默认外补丁margin和内补丁padding不同" class="headerlink" title="不同浏览器的标签默认外补丁margin和内补丁padding不同"></a>不同浏览器的标签默认外补丁margin和内补丁padding不同</h2><p>发生概率：100%</p>
+<p>解决方案：使用CSS通配符*，设置内外补丁为0</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attribute">margin</span>: <span class="number">0</span>; <span class="attribute">padding</span>: <span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="块属性标签float之后，又有横向的margin值，在IE6中显示会比设置的大（IE6双边距bug）"><a href="#块属性标签float之后，又有横向的margin值，在IE6中显示会比设置的大（IE6双边距bug）" class="headerlink" title="块属性标签float之后，又有横向的margin值，在IE6中显示会比设置的大（IE6双边距bug）"></a>块属性标签float之后，又有横向的margin值，在IE6中显示会比设置的大（IE6双边距bug）</h2><p>发生概率：90%</p>
+<p> 解决方案：在float标签样式控制中加入display:inline;</p>
+<h2 id="设置较小的高度标签（一般小于10px），在IE6，IE7，遨游中超出自己设置的高度"><a href="#设置较小的高度标签（一般小于10px），在IE6，IE7，遨游中超出自己设置的高度" class="headerlink" title="设置较小的高度标签（一般小于10px），在IE6，IE7，遨游中超出自己设置的高度"></a>设置较小的高度标签（一般小于10px），在IE6，IE7，遨游中超出自己设置的高度</h2><p>发生概率：60%</p>
+<p>解决方案：给超出高度的标签设置overflow:hidden;或者设置行高line-height小于你设置的高度。</p>
+<h2 id="行内标签设置display-block-后又采用float布局，再设置横向margin值时，在IE6中显示会比设置的大（IE6双边距bug）"><a href="#行内标签设置display-block-后又采用float布局，再设置横向margin值时，在IE6中显示会比设置的大（IE6双边距bug）" class="headerlink" title="行内标签设置display:block;后又采用float布局，再设置横向margin值时，在IE6中显示会比设置的大（IE6双边距bug）"></a>行内标签设置display:block;后又采用float布局，再设置横向margin值时，在IE6中显示会比设置的大（IE6双边距bug）</h2><p>发生概率：20%</p>
+<p>解决方案：在display:block;后面加上display:inline;display:table;</p>
+<h2 id="图片默认有间距"><a href="#图片默认有间距" class="headerlink" title="图片默认有间距"></a>图片默认有间距</h2><p>发生概率：20%</p>
+<p>解决方案：使用float为img布局</p>
+<h2 id="标签最低高度设置min-height不兼容"><a href="#标签最低高度设置min-height不兼容" class="headerlink" title="标签最低高度设置min-height不兼容"></a>标签最低高度设置min-height不兼容</h2><p>发生概率：5%</p>
+<p>解决方案：例如要设置一个标签的最小高度为200px</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attribute">min-height</span>: <span class="number">200px</span>;</span><br><span class="line"></span><br><span class="line"> <span class="attribute">height</span>: auto<span class="meta">!important</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">overflow</span>: visible;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="透明度兼容设置"><a href="#透明度兼容设置" class="headerlink" title="透明度兼容设置"></a>透明度兼容设置</h2><p>发生概率：主要看你要写的东西设不设透明度</p>
+<p>解决方案：一句话</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transparent_class</span> &#123;   </span><br><span class="line"><span class="attribute">filter</span>:<span class="built_in">alpha</span>(opacity=<span class="number">50</span>);   </span><br><span class="line"></span><br><span class="line">    <span class="attribute">-moz-opacity</span>:<span class="number">0.5</span>;   </span><br><span class="line"></span><br><span class="line">    <span class="attribute">-khtml-opacity</span>: <span class="number">0.5</span>;   </span><br><span class="line"></span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.5</span>;   </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"><span class="selector-tag">opacity</span><span class="selector-pseudo">:0.5</span>; <span class="selector-tag">This</span> <span class="selector-tag">is</span> <span class="selector-tag">the</span> “<span class="selector-tag">most</span> <span class="selector-tag">important</span>” <span class="selector-tag">one</span> <span class="selector-tag">because</span> <span class="selector-tag">it</span> <span class="selector-tag">is</span> <span class="selector-tag">the</span> <span class="selector-tag">currentstandard</span> <span class="selector-tag">in</span> <span class="selector-tag">CSS</span>. <span class="selector-tag">This</span> <span class="selector-tag">will</span> <span class="selector-tag">work</span> <span class="selector-tag">in</span> <span class="selector-tag">most</span> <span class="selector-tag">versions</span> <span class="selector-tag">of</span> <span class="selector-tag">Firefox</span>, <span class="selector-tag">Safari</span>, <span class="selector-tag">andOpera</span><span class="selector-class">.This</span> <span class="selector-tag">would</span> <span class="selector-tag">be</span> <span class="selector-tag">all</span> <span class="selector-tag">you</span> <span class="selector-tag">need</span> <span class="selector-tag">if</span> <span class="selector-tag">all</span> <span class="selector-tag">browsers</span> <span class="selector-tag">supported</span> <span class="selector-tag">current</span> <span class="selector-tag">standards</span>. <span class="selector-tag">Which</span>,<span class="selector-tag">of</span> <span class="selector-tag">course</span>, <span class="selector-tag">they</span> <span class="selector-tag">don</span>’<span class="selector-tag">t</span>.</span><br><span class="line"></span><br><span class="line">filter:alpha(opacity=50); This one you need for IE.</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">-moz-opacity</span><span class="selector-pseudo">:0.5</span>; <span class="selector-tag">You</span> <span class="selector-tag">need</span> <span class="selector-tag">this</span> <span class="selector-tag">one</span> <span class="selector-tag">to</span> <span class="selector-tag">support</span> <span class="selector-tag">way</span> <span class="selector-tag">old</span> <span class="selector-tag">school</span> <span class="selector-tag">versions</span> <span class="selector-tag">of</span> <span class="selector-tag">theMozilla</span> <span class="selector-tag">browsers</span> <span class="selector-tag">like</span> <span class="selector-tag">Netscape</span> <span class="selector-tag">Navigator</span>.</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">-khtml-opacity</span><span class="selector-pseudo">:0.5</span>; <span class="selector-tag">This</span> <span class="selector-tag">is</span> <span class="selector-tag">for</span> <span class="selector-tag">way</span> <span class="selector-tag">old</span> <span class="selector-tag">versions</span> <span class="selector-tag">of</span> <span class="selector-tag">Safari</span> (1<span class="selector-class">.x</span>) <span class="selector-tag">when</span> <span class="selector-tag">therendering</span> <span class="selector-tag">engine</span> <span class="selector-tag">it</span> <span class="selector-tag">was</span> <span class="selector-tag">using</span> <span class="selector-tag">was</span> <span class="selector-tag">still</span> <span class="selector-tag">referred</span> <span class="selector-tag">to</span> <span class="selector-tag">as</span> <span class="selector-tag">KTHML</span>, <span class="selector-tag">asopposed</span> <span class="selector-tag">to</span> <span class="selector-tag">thecurrent</span> <span class="selector-tag">WebKit</span> .</span><br></pre></td></tr></table></figure>
+
+<h2 id="Box-Model的bug"><a href="#Box-Model的bug" class="headerlink" title="Box Model的bug"></a>Box Model的bug</h2><p>描述：给一个元素设置了高度和宽度的同时，还为其设置margin和padding的值，会改变该元素的实际大小。</p>
+<p>解决办法：在需要加 margin和padding的div内部加一个div,在这个div里设置margin和padding值。</p>
+<h2 id="IE6中的列表li楼梯状bug"><a href="#IE6中的列表li楼梯状bug" class="headerlink" title="IE6中的列表li楼梯状bug"></a>IE6中的列表li楼梯状bug</h2><p>描述：通常在li中的元素（比如a）设置了浮动float，但li本身不浮动。</p>
+<p>解决办法：</p>
+<p>ul li{float:left;}</p>
+<p>或 ul li{display:inline;}</p>
+<h2 id="li空白间距"><a href="#li空白间距" class="headerlink" title="li空白间距"></a>li空白间距</h2><p>描述：在IE下，会增加li和li之间的垂直间距</p>
+<p>解决办法：给li里的a显式的添加宽度或者高度</p>
+<p>li a{width:20px;}</p>
+<p>或者</p>
+<p>li a{display:block;float:left;clear:left;}</p>
+<p>或者</p>
+<p>li {display:inline;}</p>
+<p>li a{display:block;}</p>
+<p>或者</p>
+<p>在每个列表li上设置一个实线的底边，颜色和li的背景色相同</p>
+<h2 id="overflow：auto-和position-relative的碰撞"><a href="#overflow：auto-和position-relative的碰撞" class="headerlink" title="overflow：auto;和position:relative的碰撞"></a>overflow：auto;和position:relative的碰撞</h2><p>描述：此bug只出现在IE6和IE7中，有两个块级元素，父元素设置了overflow：auto;子元素设置了position:relative;且高度大于父元素，在IE6-7中子元素不会被隐藏而是溢出。</p>
+<p>解决方案：给父元素也设置position:relative;</p>
+<h2 id="浮动层的错位"><a href="#浮动层的错位" class="headerlink" title="浮动层的错位"></a>浮动层的错位</h2><p>描述：当内容超出外包容器定义的宽度时会导致浮动层错位问题。在Firefox、IE7、IE8及其他标准浏览器里,超出的内容仅仅只是超出边缘;但在IE6中容器会忽视定义的width值,宽度会错误地随内容宽度增长而增长。如果在这个浮动元素之后还跟着一个浮动元素,那么就会导致错位问题。</p>
+<p>解决方案：overflow：hidden;</p>
+<h2 id="IE6克隆文本的bug"><a href="#IE6克隆文本的bug" class="headerlink" title="IE6克隆文本的bug"></a>IE6克隆文本的bug</h2><p>描述：若你的代码结构如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    ……</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>很有可能在IE6网页上出现一段空白文本</p>
+<p>解决方案：</p>
+<p>使用条件注释</p>
+<p>删除所有注释</p>
+<p>在注释前面的那个浮动元素加上 display：inline；</p>
+<h2 id="IE的图片缩放"><a href="#IE的图片缩放" class="headerlink" title="IE的图片缩放"></a>IE的图片缩放</h2><p>描述：图片在IE下缩放有时会影响其质量</p>
+<p>解决方案：img{ -mg-interpolation-mode:bicubic;}</p>
+<h2 id="IE6下png图片的透明bug"><a href="#IE6下png图片的透明bug" class="headerlink" title="IE6下png图片的透明bug"></a>IE6下png图片的透明bug</h2><p>描述：使用透明图片,使用png24或png32图片在IE6下面显示图片会有一层淡蓝色的背景。</p>
+<p>解决方案：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.img</span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://shenmo.wanmei.com/images/logo/sm_logo_202x104.png'</span>);</span><br><span class="line"></span><br><span class="line"><span class="attribute">_background</span>:<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">_filter</span>:progid:DXImageTransform.Microsoft.<span class="built_in">AlphaImageLoader</span>(src=<span class="string">'http://shenmo.wanmei.com/images/logo/sm_logo_202x104.png'</span>,sizingMethod=<span class="string">'scale'</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">img</span>&#123;<span class="attribute">filter</span>:progid:DXImageTransform.Microsoft.<span class="built_in">AlphaImageLoader</span>(src=<span class="string">'http://shenmo.wanmei.com/images/logo/sm_logo_202x104.png'</span>,sizingMethod=<span class="string">'scale'</span>);&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">imgsrc="test.png"</span> <span class="attr">width</span>=<span class="string">"247"</span> <span class="attr">height</span>=<span class="string">"216"</span><span class="attr">style</span>=<span class="string">"filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://shenmo.wanmei.com/images/logo/sm_logo_202x104.png',sizingMethod='scale');"</span> <span class="attr">alt</span>=<span class="string">""</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="透明背景bug"><a href="#透明背景bug" class="headerlink" title="透明背景bug"></a><iframe>透明背景bug</h2><p>描述：在IE浏览器中，<iframe>框架不会自动把背景设为透明</p>
+<p>解决方案：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframesrc="content.html"allowTransparency="true"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--在iframe调用的content.html页面中设置--&gt;</span></span><br><span class="line"></span><br><span class="line">body&#123;background-color: transparent;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="禁用IE默认的垂直滚动条"><a href="#禁用IE默认的垂直滚动条" class="headerlink" title="禁用IE默认的垂直滚动条"></a>禁用IE默认的垂直滚动条</h2><p>解决方案：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>&#123;</span><br><span class="line">  <span class="attribute">overflow</span>:auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/18/%E5%B8%B8%E8%A7%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" data-id="ck57xz4vv0004abp5fggve63l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/yang/2018/11/14/prototype%E5%92%8C__proto__/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          prototype和__proto__、constructorp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/yang/2018/08/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/yang/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/yang/2020/01/10/typescript/">typescript</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2020/01/10/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Vue生命周期</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2019/01/13/git%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">Git命令</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2018/12/28/%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E4%BE%A6%E5%90%AC%E5%99%A8/">computed 和 watch</a>
+          </li>
+        
+          <li>
+            <a href="/yang/2018/12/15/Vuex/">Vuex</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 徐文洋<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/yang/" class="mobile-nav-link">Home</a>
+  
+    <a href="/yang/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/yang/fancybox/jquery.fancybox.css">
+
+  
+<script src="/yang/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/yang/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
