@@ -56,11 +56,11 @@ tsc --init
 
 1. 第一种定义数组的方式
 
- ```js
+```js
       var arr : number [ ] = [11, 22 , 33]
       console.log( arr ) // [11, 22 , 33]
       // 定义时 规定了数组内部 的 数据类型为number 当改为其他类型时 会报错
- ```
+```
 
 2. 第二种定义数组的方式
 
@@ -282,12 +282,12 @@ flag = false
 console.log( flag )  // 输出 false
 ```
 
- ```js
+```js
 var num : number = 123
 num = 456 
 console.log( num ) // 输出456
 num = 'str'  //报错
- ```
+```
 
 
 
@@ -826,7 +826,7 @@ alert ( w.run( ) )  //李四在运动
 
 * **private** ：私有    在类里面可以访问，子类、类外部都没法访问
 
- ```js
+```js
                 class Person{
                     private name:string;  /*私有*/
                     constructor(name:string){
@@ -844,7 +844,7 @@ alert ( w.run( ) )  //李四在运动
                         console.log(`${this.name}在工作`)  //报错 无法访问
                     }
                 }
- ```
+```
 
 * 内部访问
 
