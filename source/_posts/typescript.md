@@ -1310,7 +1310,13 @@ w.coding('写代码')
 
 ### 泛型的定义
 
-1. **泛型：**软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。 组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时为你提供了十分灵活的功能。
+1. **什么是泛型：**泛型的本质是参数化类型，通俗的将就是所操作的数据类型被指定为一个参数，这种参数类型可以用在类、接口和方法的创建中，分别成为泛型类，泛型接口、泛型方法
+
+2. **为什么使用泛型：**ypeScript 中不建议使用 any 类型，不能保证类型安全，调试时缺乏完整的信息。
+
+   TypeScript可以使用泛型来创建`可重用`的组件。支持当前数据类型，同时也能支持未来的数据类型。扩展灵活。可以在编译时发现你的类型错误，从而保证了类型安全。
+
+3. **泛型：**软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。 组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时为你提供了十分灵活的功能。
 
    在像`C#`和`Java`这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。
 
@@ -1318,16 +1324,12 @@ w.coding('写代码')
 
 ### 泛型函数
 
-1. 
-
 ```js
 //只能返回 string 类型
 function getData(value:string):string {
     return value
 }
 ```
-
-* 泛型：可以支持不特定的数据类型   要求：传入的参数和返回的参数一致
 
 * 定义泛型   `< T >`  表示泛型，具体什么类型是调用这个方法决定的
 
@@ -1400,6 +1402,113 @@ alert(m2.min())
 ```
 
 使用泛型的好处：不仅有类型校验，还可以规定传入类型
+
+* **把类作为参数的泛型类**
+
+  定义一个User的类这个类的作用就是映射数据库字段 
+
+  然后定义一个 MysqlDb的类这个类用于操作数据库  
+
+  然后把User类作为参数传入到MysqlDb中
+
+```js
+把类作为参数来约束数据传入的数据类型
+class User {
+    public username:string|undefined
+    public password:string|undefined
+}
+class MysqlDb {
+    add(user:User):boolean{
+        console.log(user);
+        return true
+    }
+}
+var u = new User()
+u.username = '张三'
+u.password = '123456'
+var Db = new MysqlDb()
+Db.add(u)
+```
+
+```js
+class ArticleCate {
+    public title:string|undefined
+    public desc:string|undefined
+    public status:number|undefined
+}
+class MysqlDb {
+    add(info:ArticleCate):boolean{
+        console.log(info);        
+        console.log(info.title);        
+        return true
+    }
+}
+var a = new ArticleCate()
+a.title = "国内"
+a.desc = "国内新闻"
+a.status = 1
+var Db = new MysqlDb()
+Db.add(a)
+```
+
+* **泛类：**泛型可以帮助我们避免重复的代码以及对不特定数据类型的支持(类型校验)，把类当做参数的泛型类
+
+```js
+//操作泛型类的数据库
+class MysqlDb<T> {
+    add(info:T):boolean{
+        console.log(info);        
+        return true
+    }
+    updata(info:T,id:number):boolean{
+        console.log(info);
+        console.log(id);       
+        return true
+    }
+}
+//想给User表增加数据
+// 1 定义一个User类 和数据库进行映射
+class User {
+    username:string|undefined
+    password:string|undefined
+}
+var u = new User()
+u.username = "张三"
+u.password = "123456"
+
+// 2 定义一个文章分类的类 和数据库进行映射
+class ArticleCate {
+    title:string|undefined
+    desc:string|undefined
+    status:number|undefined
+    constructor(params:{
+        title:string|undefined,
+        desc:string|undefined,
+        status?:number|undefined
+    }){
+        this.title = params.title
+        this.desc = params.desc
+        this.status = params.status
+    }
+}
+//增加操作
+var a = new ArticleCate({
+    title:'分类',
+    desc:'1111'
+})
+//类当参数的泛型类
+var Db = new MysqlDb<ArticleCate>()
+Db.add(a)
+var b = new ArticleCate({
+    title:'企业',
+    desc:'123'
+})
+b.status=0
+var CC = new MysqlDb<ArticleCate>()
+CC.updata(b,12)
+```
+
+
 
 ### 泛型接口
 
