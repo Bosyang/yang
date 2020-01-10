@@ -42,210 +42,220 @@ tsc --init
 
 ## 数据类型
 
-1. 数字类型(number)
+### 数字类型(number)
 
-2. 布尔类型(boolean)
+### 布尔类型(boolean)
 
-3. 字符串(string)
+###  字符串(string)
 
-4. 数组(Array)
+### 数组(Array)
 
-   ​     在定义时 规定了类型 无法再改变
+在定义时 规定了类型 无法再改变
 
-   * ts 中定义数组 有 两种 方式
+* ts 中定义数组 有 两种 方式
 
-   1. 第一种定义数组的方式
+1. 第一种定义数组的方式
 
-      ```js
+ ```js
       var arr : number [ ] = [11, 22 , 33]
       console.log( arr ) // [11, 22 , 33]
       // 定义时 规定了数组内部 的 数据类型为number 当改为其他类型时 会报错
-      ```
+ ```
 
-   2. 第二种定义数组的方式
+2. 第二种定义数组的方式
 
-      ```js
-      var arr : Array<number> = [11, 22, 33]
-      console.log( arr ) // [11, 22, 33]
-      ```
+```js
+var arr : Array<number> = [11, 22, 33]
+console.log( arr ) // [11, 22, 33]
+```
 
-      
+### 元组类型(tuple)
 
-5. 元组类型(tuple)
+1. 也属于数组类型
 
-   1. 也属于数组类型
+```js
+let arr : [ number , string  ] = [123, 'this is ts']
+console.log( arr ) //  [123, 'this is ts']
+```
 
-   ```js
-   let arr : [ number , string  ] = [123, 'this is ts']
-   console.log( arr ) //  [123, 'this is ts']
-   ```
+### 枚举类型(enum)
 
-   
+1. `enum`类型是对JavaScript标准数据类型的一个补充。 像C#等其它语言一样，使用枚举类型可以为一组数值赋予友好的名字。
 
-6. 枚举类型(enum)
+```js
+enum Flag ={ success = 1 , error = 2 }
+let f : Flag.success
+console.log( f )    //  1
+```
 
-   1. `enum`类型是对JavaScript标准数据类型的一个补充。 像C#等其它语言一样，使用枚举类型可以为一组数值赋予友好的名字。
+2.  
 
-   ```js
-   enum Flag ={ success = 1 , error = 2 }
-   let f : Flag.success
-   console.log( f )    //  1
-   ```
+```js
+enum Color { blue , red , 'orange'}
+var c : Color = Color.red
+console.log( c )     //  1  如果标识符没有赋值 他的值就是下标
+```
 
-   2.  
+3.  
 
-   ```js
-   enum Color { blue , red , 'orange'}
-   var c : Color = Color.red
-   console.log( c )     //  1  如果标识符没有赋值 他的值就是下标
-   ```
+```js
+enum Color { blue , red = 3 , 'orange'}
+var c : Color = Color.orange
+console.log( c )     //  4   改变下标
+```
 
-   3.  
+4.  
 
-   ```js
-   enum Color { blue , red = 3 , 'orange'}
-   var c : Color = Color.orange
-   console.log( c )     //  4   改变下标
-   ```
+```js
+enum Error { 'underfined ' = -1 , 'null' = 2 ,'success' = 1}
+var e : Error = Erro.null
+console.log( e )      // 1  
+```
 
-   4.  
+### 任意类型(Any)
 
-   ```js
-   enum Error { 'underfined ' = -1 , 'null' = 2 ,'success' = 1}
-   var e : Error = Erro.null
-   console.log( e )      // 1  
-   ```
+```js
+var num : number = 123 ;
+num = 'str'   //  报错
 
-   
+var  a : any = 123 ;
+num = true ;
+console.log( num )  // true 
+```
 
-7. 任意类型(Any)
+1. 实际操作中用法
 
-   ```js
-   var num : number = 123 ;
-   num = 'str'   //  报错
-   
-   var  a : any = 123 ;
-   num = true ;
-   console.log( num )  // true 
-   ```
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        box
+    </div>
+    <script src="js/hello world.js"></script>
+</body>
+</html>
+```
 
-   1. 实际操作中用法
+```js
+ var box : any = document.getElementById('box') // box要指定为any 类型 
+ box.style.color = 'red'  //否则 会 报错
+```
 
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-       <title>Document</title>
-   </head>
-   <body>
-       <div id="box">
-           box
-       </div>
-       <script src="js/hello world.js"></script>
-   </body>
-   </html>
-   ```
+### void类型
 
-   ```js
-    var box : any = document.getElementById('box') // box要指定为any 类型 
-    box.style.color = 'red'  //否则 会 报错
-   ```
+1. 
 
-   
+```js
+// es5 定义方法
+function run ( ){
+    console.log('run')
+}
+run()
+```
 
-8. void类型
+2. 
 
-   1. ```js
-      // es5 定义方法
-      function run ( ){
-          console.log('run')
-      }
-      run()
-      ```
+```js
+//表示方法没有返回 任何类型
+function run ( ) : void {
+    console.log('run')
+}
+run()
+```
 
-   2. ```js
-      //表示方法没有返回 任何类型
-      function run ( ) : void {
-          console.log('run')
-      }
-      run()
-      ```
+3. 
 
-   3. ``` js
-      function run ( ) : number {    //错误写法   
-          console.log('run')
-      }
-      run()
-      ```
+``` js
+function run ( ) : number {    //错误写法   
+    console.log('run')
+}
+run()
+```
 
-   4. ```js
-      function run ( ) : number {    // 如果有返回值 要写返回值类型   正确写法
-          return 123
-      }
-      run()
-      ```
+4. 
 
-   5. 
+```js
+function run ( ) : number {    // 如果有返回值 要写返回值类型   正确写法
+    return 123
+}
+run()
+```
 
-9. null 和 undefined
+### null 和 undefined
 
-   1. ```js
-      var num : number    // 定义没有赋值 会报错
-      console.log( num )  
-      ```
+1. 
 
-   2. ```js
-      var num : number | undefined
-      num = 123
-      console.log( num ) //输出123
-      ```
+```js
+var num : number    // 定义没有赋值 会报错
+console.log( num )  
+```
 
-   3. ```js
-      var num : number | undefined   // 定义没有赋值 不会报错
-      console.log( num ) // 输出 ： undefined     //正确
-      ```
+2. 
 
-   4. 一个元素 可能是 number 可能是 null 可能是 undefind   一个元素可以设置多个类型
+```js
+var num : number | undefined
+num = 123
+console.log( num ) //输出123
+```
 
-      ```js
-      var num : number | null | undefined
-      num = 1234
-      console.log( num )   // 输出1234
-      ```
+3. 
 
-      
+```js
+var num : number | undefined   // 定义没有赋值 不会报错
+console.log( num ) // 输出 ： undefined     //正确
+```
 
-10. never类型
+4. 一个元素 可能是 number 可能是 null 可能是 undefind   一个元素可以设置多个类型
 
-    1. 代表从不会出现的值 
+```js
+var num : number | null | undefined
+num = 1234
+console.log( num )   // 输出1234
+```
 
-    2. ```js
-       var a : undefined;
-       a = null // 报错
-       var b : null
-       b = null //正确写法
-       ```
 
-    3. ```js
-       var a : never
-       a = 123   //报错
-       ```
 
-    4. ```js
-       var a : never
-       a= (()=>{
-            throw new Error( '错误' )
-       })()
-       ```
+### never类型
 
-    5. 
+1. 代表从不会出现的值 
 
-* Object ：`object`表示非原始类型，也就是除`number`，`string`，`boolean`，`symbol`，`null`或`undefined`之外的类型。
+2. 
 
-  使用`object`类型，就可以更好的表示像`Object.create`这样的API
+```js
+var a : undefined;
+a = null // 报错
+var b : null
+b = null //正确写法
+```
+
+3. 
+
+```js
+var a : never
+a = 123   //报错
+```
+
+4. 
+
+```js
+var a : never
+a= (()=>{
+     throw new Error( '错误' )
+})()
+```
+
+### Object
+
+**Object ：**`object`表示非原始类型，也就是除`number`，`string`，`boolean`，`symbol`，`null`或`undefined`之外的类型。
+
+使用`object`类型，就可以更好的表示像`Object.create`这样的API
 
 ```js
 declare function create(o: object | null): void;
@@ -336,108 +346,106 @@ run ( )   // 打印出  run
 
 2. 方法可选参数
 
-   1. ES5 里面 方法的 形参和实参 可以不一样 ，但 ts 中必须一样， 如果不一样就要配置参数  
-   2. 用 问号 `?` 配置可选参数
-   3. 注意 可选参数 必须配置到参数的最后面
+* ES5 里面 方法的 形参和实参 可以不一样 ，但 ts 中必须一样， 如果不一样就要配置参数  
+* 用 问号 `?` 配置可选参数
+* 注意 可选参数 必须配置到参数的最后面
 
-   ```js
-   function getInfo ( name : string , age : number ) : string{
-       if ( age ) {
-           return `${name} --- ${age}`
-       }else {
-           return `${name} --- 年龄保密`
-       }
-   }
-   alert( getInfo ( 'zhangsan' ))    // 可执行 但是 编译报错
-   
-   // 用  ？  配置 可选参数   
-   function getInfo ( name : string , age ? : number ) : string{
-       if ( age ) {
-           return `${name} --- ${age}`
-       }else {
-           return `${name} --- 年龄保密`
-       }
-   }
-   alert( getInfo ( 'zhangsan' ))    //  ? 配置 可选参数
-   ```
+```js
+function getInfo ( name : string , age : number ) : string{
+    if ( age ) {
+        return `${name} --- ${age}`
+    }else {
+        return `${name} --- 年龄保密`
+    }
+}
+alert( getInfo ( 'zhangsan' ))    // 可执行 但是 编译报错
+
+// 用  ？  配置 可选参数   
+function getInfo ( name : string , age ? : number ) : string{
+    if ( age ) {
+        return `${name} --- ${age}`
+    }else {
+        return `${name} --- 年龄保密`
+    }
+}
+alert( getInfo ( 'zhangsan' ))    //  ? 配置 可选参数
+```
 
 3. 默认参数
 
-   1. es5里面没法设置默认参数，es6和 ts 中可以设置默认参数
+* es5里面没法设置默认参数，es6和 ts 中可以设置默认参数
 
-   ```js
-   function getInfo ( name : string , age : number = 20 ) : string{
-       if ( age ) {
-           return `${name} --- ${age}`
-       }else {
-           return `${name} --- 年龄保密`
-       }
-   }
-   alert( getInfo ( 'zhangsan' ))    //  zhangsan --- 30
-   ```
+```js
+function getInfo ( name : string , age : number = 20 ) : string{
+    if ( age ) {
+        return `${name} --- ${age}`
+    }else {
+        return `${name} --- 年龄保密`
+    }
+}
+alert( getInfo ( 'zhangsan' ))    //  zhangsan --- 30
+```
 
 4. 剩余参数
 
-   1. ```js
-      function sum ( a : number , b : number , c : number , d : number ) : number {
-          return a + b + c + d
-      }
-      alert( sum ( 1 , 2 , 3 , 4 ))
-      ```
+* 
 
-   2. 三点运算符
+```js
+function sum ( a : number , b : number , c : number , d : number ) : number {
+    return a + b + c + d
+}
+alert( sum ( 1 , 2 , 3 , 4 ))
+```
 
-   ```js
-   //  三点运算符接收 传过来的参数
-   function sum ( ...result : number [ ] ) : number {
-       var sum = 0 
-       for ( var i = 0 ; i < result.length ; i++ ) {
-           sum += result [ i ]
-       }
-       return sum 
-   }
-   alert( sum ( 1 , 2 , 3 , 4 ))
-   ```
+* 三点运算符
+
+```js
+//  三点运算符接收 传过来的参数
+function sum ( ...result : number [ ] ) : number {
+    var sum = 0 
+    for ( var i = 0 ; i < result.length ; i++ ) {
+        sum += result [ i ]
+    }
+    return sum 
+}
+alert( sum ( 1 , 2 , 3 , 4 ))
+```
 
 5. 函数重载
 
-   1. ts 为了 兼容 es5 以及 es6 重载的写法  和  Java 中 有区别
+* ts 为了 兼容 es5 以及 es6 重载的写法  和  Java 中 有区别
 
-   ```js
-   function css ( config : any ) : any {
-       
-   }
-   function css ( config : any , value : ) ;
-   //es5 中 出现同名的方法 。下面的方法 会替换上面的方法
-   
-   // ts 中的重载
-   function getInfo ( name : string ) : string
-   function getInfo ( age : number ) : number
-   function getInfo ( str : any ) : any {
-       if ( typeof str === 'string' ) {
-           return '我叫： ' + str
-       }else{
-           return '我的年龄是' + str
-       }
-   }
-   
+```js
+function css ( config : any ) : any {
+    
+}
+function css ( config : any , value : ) ;
+//es5 中 出现同名的方法 。下面的方法 会替换上面的方法
 
-   function getInfo(name:string):string;
-   function getInfo(name:string,age:number):string;
-   function getInfo(name:any,age?:any):any{
-       if(age){
-   
-         return '我叫：'+name+'我的年龄是'+age;
-       }else{
-   
-         return '我叫：'+name;
-       }
-   }
-   ```
-   
+// ts 中的重载
+function getInfo ( name : string ) : string
+function getInfo ( age : number ) : number
+function getInfo ( str : any ) : any {
+    if ( typeof str === 'string' ) {
+        return '我叫： ' + str
+    }else{
+        return '我的年龄是' + str
+    }
+}
+function getInfo(name:string):string;
+function getInfo(name:string,age:number):string;
+function getInfo(name:any,age?:any):any{
+    if(age){
+      return '我叫：'+name+'我的年龄是'+age;
+    }else{
+      return '我叫：'+name;
+    }
+}
+```
+
 6. 箭头函数  
 
-   this 指向   箭头函数里面this指向上下文
+* this 指向   箭头函数里面this指向上下文
 
 ```js
 setTimeout(function(){
